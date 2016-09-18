@@ -113,9 +113,11 @@ var plugins = [];
 //  加载jq，否则项目中使用jquery会报错'$ is not defined',
 //  用jquery('#**')这样的方式使用jquery当然也是不行滴~
 //  */
-// plugins.push(new webpack.ProvidePlugin({
-// 	$: 'jquery'
-// }));
+plugins.push(new webpack.ProvidePlugin({
+	$: 'jquery',
+	_: 'underscore',
+	React: 'react'
+}));
 
 
 
@@ -176,7 +178,7 @@ plugins.push(new webpack.optimize.UglifyJsPlugin({
 
 /****************************webpack的总体配置******************************/
 module.exports = {
-	devtool: 'eval-source-map',//配置生成Source Maps，选择合适的选项
+	devtool: 'source-map',//配置生成Source Maps，选择合适的选项
 	//入口文件，这里循环所有入口文件，不需要每个都写出来
 	// entry: ['./public/asset/script'],
 	entry: {
@@ -199,14 +201,17 @@ module.exports = {
 	module: {
 		loaders: [
 			{
-				test: /\.js$/,
-				loader: "babel",
-				include: "asset/script"
-			},      /*es6 to es5*/
+				test: /\.json$/,
+				loader: "json"
+			},
 			{
-				test: /\.jsx$/,
-				loader: 'jsx-loader'
-			},    /*jsx to js,es5 to es6*/
+				test: /\.js[x]?$/,
+				loader: "babel",
+				include: "asset/script",
+				query: {
+					presets: ['es2015','react']
+				}
+			},      /*es6 to es5*/
 			/*
 			 如果用了es6，jsx-loader这部分需要改成这样，使用babel-loader
 			 {
