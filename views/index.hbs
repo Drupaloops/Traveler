@@ -2,16 +2,17 @@
 <script type="text/babel">
     var RepoList = React.createClass({
         getInitialState: function() {
-            return { loading: true, error: null, data: null};
+            return { loading: true, error: null, data: null, oops: "小胖子阿杜正在努力加载中..."};
         },
         componentDidMount() {
             this.props.promise.then(
                     value => this.setState({loading: false, data: value}),
-                    error => this.setState({loading: false, error: error}));
+                    error => this.setState({loading: false, error: error})),
+                    oops => this.setState({oops: "拿到咯!!!"});
         },
         render: function() {
-            if (this.state.loading) {
-                return <span>Loading...</span>;
+            if (this.state.loading && this.state.oops) {
+                return <span>{this.state.oops}</span>;
             }
             else if (this.state.error !== null) {
                 return <span>Error: {this.state.error.message}</span>;
