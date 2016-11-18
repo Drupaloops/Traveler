@@ -51,7 +51,7 @@ module.exports = {
 	devtool: 'source-map',//debug
 	entry: {
 		index:"./public/asset/scripts/index.js",
-		vendor: ['react', 'react-dom']
+		vendor: ['react', 'react-dom', 'react-router']
 	},
 	output: {
 		path: distPath,
