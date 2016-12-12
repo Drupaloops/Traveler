@@ -1,30 +1,32 @@
 import { combineReducers } from 'redux';
-import { ADD_ITEM, DELETE_ITEM, EDIT_ITEM } from '../actions'
+import { SIGNIN, SIGNUP, LOGOUT } from '../actions'
 
 
 function contacts(state = [], action) {
 	switch (action.type) {
-		case ADD_ITEM:
-			console.log("reduce ADD_ITEM")
+		case SIGNIN:
+			console.log("reduce SIGNIN")
 			return [
 				...state,
 				{
-					name: action.name,
-					number: action.number
+					mobileNo: action.mobileNo,
+					password: action.password
 				}
 			];
 
-		case DELETE_ITEM:
+		case SIGNUP:
+			console.log("reduce SIGNUP")
 			return [
 				...state.slice(0, action.index),
 				...state.slice(action.index + 1)
 			];
 
-		case EDIT_ITEM:
+		case LOGOUT:
 			return [
-				...state.slice(0, action.index),
-				Object.assign({}, {'name': action.name, 'number': action.number}),
-				...state.slice(action.index + 1)
+				...state,
+				{
+					mobileNo: action.mobileNo
+				}
 			];
 
 		default:

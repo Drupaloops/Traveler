@@ -1,30 +1,44 @@
 // actions
-
-export const ADD_ITEM = 'ADD_ITEM';
-export const DELETE_ITEM = 'DELETE_ITEM';
-export const EDIT_ITEM = 'EDIT_ITEM';
-
+export const SIGNIN = 'SIGNIN';
+export const SIGNIN_SUCCESS = 'SIGNIN_SUCCESS';
+export const SIGNIN_FAIL = 'SIGNIN_FAIL';
+export const SIGNUP = 'SIGNUP';
+export const LOGOUT = 'LOGOUT';
 // actions creators
-export function addItem(name, number) {
+export function signin(mobileNo, password) {
 	return {
-		type: ADD_ITEM,
-		name,
-		number
+		type: SIGNIN,
+		mobileNo,
+		password
 	};
 }
 
-export function deleteItem(index) {
+export function signinSuc(mobileNo, password) {
 	return {
-		type: DELETE_ITEM,
+		type: SIGNIN_SUCCESS,
+		mobileNo,
+		password
+	};
+}
+
+export function signinFail(mobileNo, password) {
+	return {
+		type: SIGNIN_FAIL,
+		mobileNo,
+		password
+	};
+}
+
+export function signup(index) {
+	return {
+		type: SIGNUP,
 		index
 	};
 }
 
-export function editItem(index, name, number) {
+export function logout(mobileNo) {
 	return {
-		type: EDIT_ITEM,
-		index,
-		name,
-		number
+		type: LOGOUT,
+		mobileNo
 	};
 }
